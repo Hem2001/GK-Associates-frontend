@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+}
+
+.navbar {
+  background: #071a3d;
+  color: white;
+  padding: 20px 40px;
+}
+
+.logo {
+  margin-bottom: 10px;
+}
+
+.rolling {
+  display: inline-block;
+  background: #2f4a7a;
+  padding: 10px;
+  margin: 3px;
+  border-radius: 5px;
+  animation: roll 2s infinite;
+}
+
+@keyframes roll {
+  0% {
+    transform: translateY(-20px) rotateX(90deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 60px;
+}
+
+.hero h1 {
+  font-size: 70px;
+  color: #071a3d;
+}
+
+.buttons button,
+.query button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin-right: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hero-right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature {
+  background: #071a3d;
+  color: white;
+  padding: 25px;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.dropdown {
+  background: white;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #f4f4f4;
+}
+
+.services {
+  padding: 50px;
+}
+
+.services h2 {
+  text-align: center;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.query {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 40px;
+}
+
+.query input,
+.query textarea {
+  padding: 15px;
+}
+
+footer {
+  background: #071a3d;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero,
+  .hero-right,
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 45px;
+  }
+}
