@@ -4,6 +4,10 @@ body {
   background: #f4f6fb;
 }
 
+/* =========================================
+   NAVBAR
+========================================= */
+
 .navbar {
   background: #071a3d;
   color: white;
@@ -14,26 +18,82 @@ body {
   margin-bottom: 10px;
 }
 
-.rolling {
+.gk-letter {
   display: inline-block;
   background: #2f4a7a;
   padding: 10px;
   margin: 3px;
   border-radius: 5px;
-  animation: roll 2s infinite;
+  animation: gkSlow 3s ease-in-out infinite;
 }
 
-@keyframes roll {
+@keyframes gkSlow {
   0% {
-    transform: translateY(-20px) rotateX(90deg);
-    opacity: 0;
+    opacity: 0.3;
+    transform: translateY(-15px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   100% {
-    transform: translateY(0) rotateX(0);
-    opacity: 1;
+    opacity: 0.3;
+    transform: translateY(0);
   }
 }
+
+/* =========================================
+   TAGLINE
+========================================= */
+
+.tagline {
+  display: block;
+  text-align: center;
+  margin: 5px auto 0;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  animation: taglineRoll 5s ease-in-out infinite alternate;
+}
+
+@keyframes taglineRoll {
+  0% {
+    transform: translateX(-30px);
+  }
+
+  100% {
+    transform: translateX(30px);
+  }
+}
+
+/* =========================================
+   CONTACT INFORMATION
+========================================= */
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.contact-info {
+  text-align: right;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+
+.contact-info div {
+  white-space: nowrap;
+}
+
+/* =========================================
+   MENU
+========================================= */
 
 .menu {
   display: flex;
@@ -47,60 +107,508 @@ body {
   text-decoration: none;
 }
 
+/* =========================================
+   HERO
+========================================= */
+
 .hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 30px 20px 60px;
+
+  min-height: 620px;
+
+  text-align: center;
 }
 
+/*
+   Hide the old large GK ASSOCIATES heading
+   because GK ASSOCIATES is now displayed
+   in the rotating centre.
+*/
+
 .hero h1 {
-  font-size: 70px;
+  display: block;
+
+  font-size: 42px;
+
   color: #071a3d;
+
+  margin: 8px 0;
+
+  text-align: center;
 }
+
+/* =========================================
+   HERO LEFT / CONTENT
+========================================= */
+
+.hero-left {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* =========================================
+   HERO RIGHT
+========================================= */
+
+.hero-right {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
 
 .buttons button,
 .query button {
   background: red;
   color: white;
+
   border: none;
+
   padding: 12px 20px;
+
   margin-right: 10px;
+
   border-radius: 8px;
+
   cursor: pointer;
 }
 
-.hero-right {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+/* =========================================
+   ROTATING SERVICE WEB
+========================================= */
+
+.service-orbit {
+  position: relative;
+
+  width: 520px;
+  height: 520px;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 }
 
-.feature {
+/* =========================================
+   OUTER ROTATING RING
+========================================= */
+
+.orbit-ring {
+  position: absolute;
+
+  width: 370px;
+  height: 370px;
+
+  border: 2px solid rgba(7, 26, 61, 0.20);
+
+  border-radius: 50%;
+
+  animation: orbitRotate 24s linear infinite;
+}
+
+/* =========================================
+   INNER SPIDER WEB
+========================================= */
+
+.orbit-ring::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 38px;
+
+  border: 1px dashed rgba(7, 26, 61, 0.18);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.orbit-ring::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 78px;
+
+  border: 1px dashed rgba(7, 26, 61, 0.14);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+/* =========================================
+   SERVICE BUBBLES
+========================================= */
+
+.orbit-service {
+  position: absolute;
+
+  width: 105px;
+  min-height: 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
   background: #071a3d;
+
   color: white;
-  padding: 25px;
+
+  border-radius: 12px;
+
   text-align: center;
-  border-radius: 15px;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  line-height: 1.2;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.20);
+
   cursor: pointer;
+
+  z-index: 5;
+
+  /*
+     rotate is intentionally separate from transform.
+     This allows the service box to counter-rotate
+     while the complete orbit rotates.
+  */
+
+  rotate: 0deg;
+
+  animation:
+    serviceZoom 24s ease-in-out infinite,
+    serviceCounterRotate 24s linear infinite;
 }
 
-.dropdown {
-  background: white;
-  border-radius: 10px;
-  margin-top: 10px;
-  padding: 10px;
+/* =========================================
+   SERVICE POSITIONS
+========================================= */
+
+.orbit-service-0 {
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.dropdown-item {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
+.orbit-service-1 {
+  top: 42px;
+  right: -40px;
 }
 
-.dropdown-item:hover {
-  background: #f4f4f4;
+.orbit-service-2 {
+  top: 50%;
+  right: -58px;
+  transform: translateY(-50%);
 }
+
+.orbit-service-3 {
+  bottom: 42px;
+  right: -25px;
+}
+
+.orbit-service-4 {
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.orbit-service-5 {
+  bottom: 42px;
+  left: -25px;
+}
+
+.orbit-service-6 {
+  top: 50%;
+  left: -58px;
+  transform: translateY(-50%);
+}
+
+/* =========================================
+   SERVICE ZOOM TIMING
+========================================= */
+
+.orbit-service-0 {
+  animation-delay: 0s;
+}
+
+.orbit-service-1 {
+  animation-delay: 3.4s;
+}
+
+.orbit-service-2 {
+  animation-delay: 6.8s;
+}
+
+.orbit-service-3 {
+  animation-delay: 10.2s;
+}
+
+.orbit-service-4 {
+  animation-delay: 13.6s;
+}
+
+.orbit-service-5 {
+  animation-delay: 17s;
+}
+
+.orbit-service-6 {
+  animation-delay: 20.4s;
+}
+
+/* =========================================
+   SERVICE ZOOM
+========================================= */
+
+@keyframes serviceZoom {
+  0% {
+    scale: 1;
+
+    background: #071a3d;
+
+    box-shadow:
+      0 5px 18px rgba(0, 0, 0, 0.20);
+  }
+
+  10% {
+    scale: 1;
+  }
+
+  18% {
+    scale: 1.35;
+
+    background: #2f4a7a;
+
+    box-shadow:
+      0 0 30px rgba(47, 74, 122, 0.65);
+  }
+
+  30% {
+    scale: 1.35;
+
+    background: #2f4a7a;
+
+    box-shadow:
+      0 0 30px rgba(47, 74, 122, 0.65);
+  }
+
+  42% {
+    scale: 1;
+
+    background: #071a3d;
+
+    box-shadow:
+      0 5px 18px rgba(0, 0, 0, 0.20);
+  }
+
+  100% {
+    scale: 1;
+
+    background: #071a3d;
+  }
+}
+
+/* =========================================
+   SERVICE COUNTER ROTATION
+========================================= */
+
+@keyframes serviceCounterRotate {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: -360deg;
+  }
+}
+
+/* =========================================
+   OUTER ORBIT ROTATION
+========================================= */
+
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   CENTRE GK ASSOCIATES
+========================================= */
+
+.orbit-center {
+  position: absolute;
+
+  z-index: 20;
+
+  width: 155px;
+  height: 155px;
+
+  border-radius: 50%;
+
+  background: #071a3d;
+
+  color: white;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 0 0 7px rgba(7, 26, 61, 0.08),
+    0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   ROTATING CENTRE RING
+========================================= */
+
+.orbit-center::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -9px;
+
+  border-radius: 50%;
+
+  border: 3px solid #2f4a7a;
+
+  border-top-color: white;
+
+  border-right-color: rgba(255, 255, 255, 0.35);
+
+  animation:
+    centerRingRotate 6s linear infinite;
+}
+
+.orbit-center::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -17px;
+
+  border-radius: 50%;
+
+  border: 1px dashed rgba(7, 26, 61, 0.30);
+
+  animation:
+    centerRingRotateReverse 10s linear infinite;
+}
+
+/* =========================================
+   CENTRE TEXT
+========================================= */
+
+.orbit-center-title {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
+
+  line-height: 1;
+}
+
+.orbit-center-subtitle {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 12px;
+
+  letter-spacing: 3px;
+
+  margin-top: 8px;
+}
+
+.orbit-center-line {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 8px;
+
+  margin-top: 9px;
+
+  opacity: 0.8;
+}
+
+/* =========================================
+   CENTRE RING ROTATION
+========================================= */
+
+@keyframes centerRingRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes centerRingRotateReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* =========================================
+   SERVICES
+========================================= */
 
 .services {
   padding: 50px;
@@ -112,20 +620,61 @@ body {
 
 .service-grid {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 20px;
 }
 
+/* =========================================
+   CARDS
+========================================= */
+
 .card {
   background: white;
+
   padding: 25px;
+
   border-radius: 15px;
 }
 
+/* =========================================
+   DROPDOWN
+========================================= */
+
+.dropdown {
+  background: white;
+
+  border-radius: 10px;
+
+  margin-top: 10px;
+
+  padding: 10px;
+}
+
+.dropdown-item {
+  padding: 10px;
+
+  border-bottom: 1px solid #ddd;
+
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #f4f4f4;
+}
+
+/* =========================================
+   QUERY
+========================================= */
+
 .query {
   display: flex;
+
   flex-direction: column;
+
   gap: 15px;
+
   padding: 40px;
 }
 
@@ -134,21 +683,412 @@ body {
   padding: 15px;
 }
 
+/* =========================================
+   FOOTER
+========================================= */
+
 footer {
   background: #071a3d;
+
   color: white;
+
   text-align: center;
+
   padding: 20px;
 }
 
+/* =========================================
+   TABLET / MOBILE
+========================================= */
+
 @media (max-width: 768px) {
-  .hero,
-  .hero-right,
-  .service-grid {
-    grid-template-columns: 1fr;
+
+  .navbar {
+    padding: 18px 20px;
+  }
+
+  .navbar-top {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .contact-info {
+    text-align: left;
+
+    margin-top: 10px;
+  }
+
+  .menu {
+    gap: 15px;
+
+    margin-top: 15px;
+  }
+
+  .hero {
+    min-height: 500px;
+
+    padding: 20px 10px 45px;
   }
 
   .hero h1 {
-    font-size: 45px;
+    display: none;
   }
+
+  .hero-right {
+    width: 100%;
+  }
+
+  .service-orbit {
+    width: 350px;
+
+    height: 400px;
+
+    margin: 0 auto;
+  }
+
+  .orbit-ring {
+    width: 270px;
+
+    height: 270px;
+  }
+
+  .orbit-center {
+    width: 125px;
+
+    height: 125px;
+  }
+
+  .orbit-center-title {
+    font-size: 20px;
+
+    letter-spacing: 2px;
+  }
+
+  .orbit-center-subtitle {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-top: 6px;
+  }
+
+  .orbit-center-line {
+    font-size: 7px;
+
+    margin-top: 7px;
+  }
+
+  .orbit-service {
+    width: 85px;
+
+    min-height: 42px;
+
+    font-size: 10px;
+
+    padding: 6px;
+  }
+
+  .orbit-service-0 {
+    top: -22px;
+  }
+
+  .orbit-service-1 {
+    top: 22px;
+
+    right: -17px;
+  }
+
+  .orbit-service-2 {
+    right: -29px;
+  }
+
+  .orbit-service-3 {
+    bottom: 22px;
+
+    right: -17px;
+  }
+
+  .orbit-service-4 {
+    bottom: -22px;
+  }
+
+  .orbit-service-5 {
+    bottom: 22px;
+
+    left: -17px;
+  }
+
+  .orbit-service-6 {
+    left: -29px;
+  }
+
+  .tagline {
+    font-size: 17px;
+
+    animation-duration: 5s;
+  }
+
+  .services {
+    padding: 30px 20px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+
+  .service-orbit {
+    width: 320px;
+
+    height: 370px;
+  }
+
+  .orbit-ring {
+    width: 245px;
+
+    height: 245px;
+  }
+
+  .orbit-center {
+    width: 112px;
+
+    height: 112px;
+  }
+
+  .orbit-center-title {
+    font-size: 18px;
+  }
+
+  .orbit-center-subtitle {
+    font-size: 9px;
+  }
+
+  .orbit-service {
+    width: 78px;
+
+    min-height: 38px;
+
+    font-size: 9px;
+  }
+
+  .orbit-service-1 {
+    right: -10px;
+  }
+
+  .orbit-service-2 {
+    right: -20px;
+  }
+
+  .orbit-service-3 {
+    right: -10px;
+  }
+
+  .orbit-service-5 {
+    left: -10px;
+  }
+
+  .orbit-service-6 {
+    left: -20px;
+  }
+}
+/* =========================================
+   COLORFUL SERVICE CARDS
+========================================= */
+
+.services {
+  background: #eef2f8;
+  padding: 55px 40px;
+}
+
+.services h2 {
+  color: #071a3d;
+  font-size: 30px;
+  margin-bottom: 35px;
+}
+
+/* Service cards */
+
+.card {
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #e8edf6
+  );
+
+  border: 1px solid #d5ddec;
+
+  padding: 25px;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 20px rgba(7, 26, 61, 0.10);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+
+  border-color: #2f4a7a;
+
+  box-shadow:
+    0 14px 28px rgba(7, 26, 61, 0.18);
+}
+
+/* Service title */
+
+.card h3 {
+  color: #071a3d;
+
+  font-size: 20px;
+
+  margin-top: 0;
+
+  margin-bottom: 18px;
+
+  border-left: 5px solid #2f4a7a;
+
+  padding-left: 12px;
+}
+
+/* Service list */
+
+.card .dropdown {
+  background: #f8faff;
+
+  border-radius: 10px;
+
+  padding: 5px 10px;
+
+  border: 1px solid #e0e6f0;
+}
+
+.card .dropdown-item {
+  color: #263957;
+
+  padding: 10px 8px;
+
+  border-bottom: 1px solid #e1e6ef;
+
+  transition:
+    background 0.2s ease,
+    padding-left 0.2s ease,
+    color 0.2s ease;
+}
+
+.card .dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.card .dropdown-item:hover {
+  background: #dfe8f7;
+
+  color: #071a3d;
+
+  padding-left: 14px;
+}
+
+/* =========================================
+   SERVICE BUTTON
+========================================= */
+
+.card > button {
+  margin-top: 18px;
+
+  background: #071a3d;
+
+  color: white;
+
+  border: none;
+
+  padding: 11px 18px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.card > button:hover {
+  background: #2f4a7a;
+
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   BOTTOM SERVICE BUTTONS
+========================================= */
+
+.services-bottom-buttons button {
+  background: #071a3d;
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 22px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.services-bottom-buttons button:hover {
+  background: #2f4a7a;
+
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   DIFFERENT SERVICE CARD ACCENTS
+========================================= */
+
+.card:nth-child(1) {
+  border-top: 4px solid #2f4a7a;
+}
+
+.card:nth-child(2) {
+  border-top: 4px solid #385f9e;
+}
+
+.card:nth-child(3) {
+  border-top: 4px solid #4d76b3;
+}
+
+.card:nth-child(4) {
+  border-top: 4px solid #557fbf;
+}
+
+.card:nth-child(5) {
+  border-top: 4px solid #42699f;
+}
+
+.card:nth-child(6) {
+  border-top: 4px solid #315886;
+}
+
+.card:nth-child(7) {
+  border-top: 4px solid #24466f;
 }

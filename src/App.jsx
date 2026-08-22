@@ -8,7 +8,6 @@ import AdminDashboard from "./AdminDashboard";
 function App() {
   const [page, setPage] = useState("home");
   const [selectedService, setSelectedService] = useState("");
-  const [openService, setOpenService] = useState(null);
 
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -82,55 +81,43 @@ function App() {
   ];
 
   // =========================
-  // CLIENT LOGIN
+  // GO TO SERVICES
   // =========================
 
-  if (page === "client") {
-    return (
-      <ClientLogin
-        goHome={() => setPage("home")}
-        login={() => setPage("clientDashboard")}
-      />
-    );
-  }
+  const goToServices = () => {
+    setTimeout(() => {
+      document
+        .getElementById("services")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 50);
+  };
 
   // =========================
-  // CLIENT DASHBOARD
+  // GO TO QUERY
   // =========================
 
-  if (page === "clientDashboard") {
-    return (
-      <ClientDashboard
-        goHome={() => setPage("home")}
-        logout={() => setPage("home")}
-      />
-    );
-  }
+  const goToQuery = () => {
+    setTimeout(() => {
+      document
+        .getElementById("query")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 50);
+  };
 
   // =========================
-  // ADMIN LOGIN
+  // SELECT SERVICE
   // =========================
 
-  if (page === "admin") {
-    return (
-      <AdminLogin
-        goHome={() => setPage("home")}
-        login={() => setPage("adminDashboard")}
-      />
-    );
-  }
-
-  // =========================
-  // ADMIN DASHBOARD
-  // =========================
-
-  if (page === "adminDashboard") {
-    return (
-      <AdminDashboard
-        goHome={() => setPage("home")}
-      />
-    );
-  }
+  const handleServiceClick = (service) => {
+    setSelectedService(service);
+    goToQuery();
+  };
 
   // =========================
   // QUERY SUBMISSION
@@ -178,14 +165,71 @@ function App() {
       setName("");
       setMobile("");
       setQuery("");
+      setSelectedService("");
     } catch (error) {
-      console.error("Query submission error:", error);
-
-      alert(
-        "Cannot connect to backend."
+      console.error(
+        "Query submission error:",
+        error
       );
+
+      alert("Cannot connect to backend.");
     }
   };
+
+  // =========================
+  // CLIENT LOGIN
+  // =========================
+
+  if (page === "client") {
+    return (
+      <ClientLogin
+        goHome={() => setPage("home")}
+        login={() =>
+          setPage("clientDashboard")
+        }
+      />
+    );
+  }
+
+  // =========================
+  // CLIENT DASHBOARD
+  // =========================
+
+  if (page === "clientDashboard") {
+    return (
+      <ClientDashboard
+        goHome={() => setPage("home")}
+        logout={() => setPage("home")}
+      />
+    );
+  }
+
+  // =========================
+  // ADMIN LOGIN
+  // =========================
+
+  if (page === "admin") {
+    return (
+      <AdminLogin
+        goHome={() => setPage("home")}
+        login={() =>
+          setPage("adminDashboard")
+        }
+      />
+    );
+  }
+
+  // =========================
+  // ADMIN DASHBOARD
+  // =========================
+
+  if (page === "adminDashboard") {
+    return (
+      <AdminDashboard
+        goHome={() => setPage("home")}
+      />
+    );
+  }
 
   // =========================
   // HOME PAGE
@@ -193,43 +237,84 @@ function App() {
 
   return (
     <div>
+
       {/* ================= HEADER ================= */}
 
       <header className="navbar">
-        <div>
-          <div className="logo">
-            {"GK ASSOCIATES"
-              .split("")
-              .map((letter, index) => (
-                <span
-                  key={index}
-                  className="rolling"
-                >
-                  {letter === " "
-                    ? "\u00A0"
-                    : letter}
-                </span>
-              ))}
+
+        <div className="navbar-top">
+
+          <div>
+
+            <div className="logo">
+              {"GK ASSOCIATES"
+                .split("")
+                .map((letter, index) => (
+                  <span
+                    key={index}
+                    className="gk-letter"
+                    style={{
+                      animationDelay: `${
+                        index * 0.2
+                      }s`,
+                    }}
+                  >
+                    {letter === " "
+                      ? "\u00A0"
+                      : letter}
+                  </span>
+                ))}
+            </div>
+
+            <p className="tagline">
+              Audit. Tax. Consulting.
+            </p>
+
           </div>
 
-          <p className="tagline">
-            Audit. Tax. Consulting.
-          </p>
+          {/* CONTACT DETAILS */}
+
+          <div className="contact-info">
+
+            <div>
+              📧 madhumg556@gmail.com
+            </div>
+
+            <div>
+              📞 +91 8892018898
+            </div>
+
+            <div>
+              📞 8904558823
+            </div>
+
+          </div>
+
         </div>
 
+        {/* NAVIGATION */}
+
         <nav className="menu">
-          <a href="#">
+
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
             Home
           </a>
 
           <a
             href="#services"
-            onClick={() => {
-              document
-                .getElementById("services")
-                .scrollIntoView({
-                  behavior: "smooth",
-                });
+            onClick={(e) => {
+              e.preventDefault();
+              goToServices();
             }}
           >
             Services
@@ -247,23 +332,24 @@ function App() {
 
           <a
             href="#query"
-            onClick={() => {
-              document
-                .getElementById("query")
-                .scrollIntoView({
-                  behavior: "smooth",
-                });
+            onClick={(e) => {
+              e.preventDefault();
+              goToQuery();
             }}
           >
             Contact Us
           </a>
+
         </nav>
+
       </header>
 
       {/* ================= HERO ================= */}
 
       <section className="hero">
+
         <div className="hero-left">
+
           <h3>
             WELCOME TO
           </h3>
@@ -281,20 +367,19 @@ function App() {
             tax and compliance solutions.
           </p>
 
+          {/* MAIN BUTTONS */}
+
           <div className="buttons">
+
             <button
-              onClick={() =>
-                document
-                  .getElementById("services")
-                  .scrollIntoView({
-                    behavior: "smooth",
-                  })
-              }
+              type="button"
+              onClick={goToServices}
             >
               Our Services
             </button>
 
             <button
+              type="button"
               onClick={() =>
                 setPage("client")
               }
@@ -303,58 +388,62 @@ function App() {
             </button>
 
             <button
+              type="button"
               onClick={() =>
                 setPage("admin")
               }
             >
               Admin Login
             </button>
+
           </div>
+
         </div>
 
-        <div className="hero-right">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="feature-box"
-            >
-              <div
-                className="feature"
-                onClick={() =>
-                  setOpenService(
-                    openService === service.title
-                      ? null
-                      : service.title
-                  )
-                }
-              >
-                {service.title}
-              </div>
+        {/* ================= ROTATING SERVICE WEB ================= */}
 
-              {openService === service.title && (
-                <div className="dropdown">
-                  {service.items.map((item) => (
-                    <div
-                      key={item}
-                      className="dropdown-item"
-                      onClick={() => {
-                        setSelectedService(item);
+        <div className="service-orbit">
 
-                        document
-                          .getElementById("query")
-                          .scrollIntoView({
-                            behavior: "smooth",
-                          });
-                      }}
-                    >
-                      {item}
-                    </div>
-                  ))}
+          <div className="orbit-ring">
+
+            {services.map(
+              (service, index) => (
+                <div
+                  key={service.title}
+                  className={`orbit-service orbit-service-${index}`}
+                  onClick={() =>
+                    handleServiceClick(
+                      service.title
+                    )
+                  }
+                >
+                  {service.title}
                 </div>
-              )}
+              )
+            )}
+
+          </div>
+
+          {/* CENTER */}
+
+          <div className="orbit-center">
+
+            <div className="orbit-center-title">
+              GK
             </div>
-          ))}
+
+            <div className="orbit-center-subtitle">
+              ASSOCIATES
+            </div>
+
+            <div className="orbit-center-line">
+              Audit • Tax • Consulting
+            </div>
+
+          </div>
+
         </div>
+
       </section>
 
       {/* ================= SERVICES ================= */}
@@ -363,30 +452,101 @@ function App() {
         className="services"
         id="services"
       >
+
         <h2>
           ALL OF OUR SERVICES
         </h2>
 
         <div className="service-grid">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="card"
-            >
-              <h3>
-                {service.title}
-              </h3>
 
-              <ul>
-                {service.items.map((item) => (
-                  <li key={item}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {services.map(
+            (service) => (
+              <div
+                key={service.title}
+                className="card"
+              >
+
+                {/* SERVICE TITLE */}
+
+                <h3>
+                  {service.title}
+                </h3>
+
+                {/* SERVICE LIST */}
+
+                <div className="dropdown">
+
+                  {service.items.map(
+                    (item) => (
+                      <div
+                        key={item}
+                        className="dropdown-item"
+                        onClick={() =>
+                          handleServiceClick(
+                            item
+                          )
+                        }
+                      >
+                        {item}
+                      </div>
+                    )
+                  )}
+
+                </div>
+
+                {/* ASK QUERY BUTTON */}
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleServiceClick(
+                      service.title
+                    )
+                  }
+                >
+                  Ask a Query
+                </button>
+
+              </div>
+            )
+          )}
+
         </div>
+
+        {/* BOTTOM BUTTONS */}
+
+        <div
+          className="services-bottom-buttons"
+          style={{
+            marginTop: "35px",
+            display: "flex",
+            justifyContent: "center",
+            gap: "15px",
+            flexWrap: "wrap",
+          }}
+        >
+
+          <button
+            type="button"
+            onClick={goToQuery}
+          >
+            Submit a Query
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              })
+            }
+          >
+            Back to Home
+          </button>
+
+        </div>
+
       </section>
 
       {/* ================= QUERY ================= */}
@@ -395,6 +555,7 @@ function App() {
         className="query"
         id="query"
       >
+
         <h2>
           QUERY SUBMISSION
         </h2>
@@ -432,10 +593,44 @@ function App() {
         />
 
         <button
+          type="button"
           onClick={submitQuery}
         >
           Submit Query
         </button>
+
+        {/* QUERY NAVIGATION BUTTONS */}
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            marginTop: "10px",
+          }}
+        >
+
+          <button
+            type="button"
+            onClick={goToServices}
+          >
+            Back to Services
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              })
+            }
+          >
+            Home
+          </button>
+
+        </div>
+
       </section>
 
       {/* ================= FOOTER ================= */}
@@ -444,6 +639,7 @@ function App() {
         © 2026 GK ASSOCIATES.
         All Rights Reserved.
       </footer>
+
     </div>
   );
 }
