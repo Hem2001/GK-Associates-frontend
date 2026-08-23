@@ -351,11 +351,12 @@ function App() {
         <div className="hero-left">
 
           <h3>
-            WELCOME TO
+            WELCOME TO GK ASSOCIATES
           </h3>
 
           <h1>
-            GK ASSOCIATES
+            Tax, GST, Audit & Accounting Services
+            in Vijayanagar, Bengaluru
           </h1>
 
           <h2>
@@ -363,8 +364,10 @@ function App() {
           </h2>
 
           <p>
-            We provide expert financial,
-            tax and compliance solutions.
+            GK Associates provides tax audit, GST,
+            income tax, accounting, bookkeeping,
+            payroll and financial consulting services
+            in Vijayanagar, Bengaluru, near Maruthi Mandir.
           </p>
 
           {/* MAIN BUTTONS */}
@@ -446,6 +449,44 @@ function App() {
 
       </section>
 
+      {/* ================= LOCAL SEO CONTENT ================= */}
+
+      <section
+        className="local-business-info"
+        style={{
+          padding: "35px 20px",
+          textAlign: "center",
+          maxWidth: "1000px",
+          margin: "0 auto",
+        }}
+      >
+
+        <h2>
+          Tax, GST & Accounting Services in
+          Vijayanagar, Bengaluru
+        </h2>
+
+        <p>
+          GK Associates provides professional
+          tax, GST, audit, accounting and financial
+          consulting services in Vijayanagar,
+          Bengaluru. We serve individuals,
+          businesses and clients looking for
+          reliable tax and financial assistance
+          near Maruthi Mandir and surrounding
+          areas.
+        </p>
+
+        <p>
+          Our services include tax audit, income
+          tax planning, GST registration and filing,
+          bookkeeping, payroll management,
+          financial reports, ESI, EPF and
+          professional tax services.
+        </p>
+
+      </section>
+
       {/* ================= SERVICES ================= */}
 
       <section
@@ -454,7 +495,8 @@ function App() {
       >
 
         <h2>
-          ALL OF OUR SERVICES
+          OUR TAX, GST, AUDIT & ACCOUNTING SERVICES
+          IN VIJAYANAGAR, BENGALURU
         </h2>
 
         <div className="service-grid">
@@ -557,8 +599,15 @@ function App() {
       >
 
         <h2>
-          QUERY SUBMISSION
+          CONTACT GK ASSOCIATES
         </h2>
+
+        <p>
+          Have a question about tax audit,
+          GST filing, income tax, accounting,
+          bookkeeping or other financial services
+          in Vijayanagar, Bengaluru?
+        </p>
 
         <h3>
           Selected Service:{" "}
